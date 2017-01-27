@@ -6,16 +6,18 @@
 package 'nodejs' do
   action :install
 end
-cookbook_file '/home/vagrant/hello.js' do
-  source 'hello.js'
+
+template '/home/vagrant/hello.js' do
+  source 'hello.erb'
   mode 777
   owner 'vagrant'
   group 'vagrant'
+  variables( :port => node['HelloWorldNodeJS']['port'], :ip => node['private-ip'] || node['ipaddress'] )
 end
 
 
 service 'helloworldApp' do
-  action :start
+  action :restart
   status_command 'ps -ef | grep hello.js| grep -v grep'
   start_command '/usr/bin/nodejs /home/vagrant/hello.js &' 
   stop_command "kill -9 `ps -ef | grep hello.js | grep -v grep | awk '{print $2}' `"
