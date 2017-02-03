@@ -17,7 +17,7 @@ template '/etc/nginx/conf.d/webapp.conf' do
   mode 777 
   owner 'vagrant' 
   group 'vagrant' 
-  variables( :privateip => node['private-ip'] || node['ipaddress'] ) 
+  variables( :listening_port => node['listening_port'], :webapp_port => node['wepapp-port'], :hosts => node['hosts'], :privateip => node['private-ip'] || node['ipaddress'] ) 
 end 
 
 

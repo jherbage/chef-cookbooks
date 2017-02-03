@@ -1,10 +1,11 @@
 upstream myapp1 {
-                server 192.168.100.20:8002;
-                server 192.168.100.30:8002;
+             <%   @hosts.each do |host| -%>   
+                server <%= host %>:<%= @webapp_port %>;
+ 	     <% end -%>
         }
 
         server {
-                listen <%= @privateip %>:8080;
+                listen <%= @privateip %>:<%= @listening_port %>;
 
                 location / {
                         proxy_pass http://myapp1;
