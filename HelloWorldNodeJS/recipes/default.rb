@@ -12,7 +12,7 @@ template '/home/vagrant/hello.js' do
   mode 777
   owner 'vagrant'
   group 'vagrant'
-  variables( :port => node['HelloWorldNodeJS']['port'], :ip => node['private-ip'] || node['ipaddress'] )
+  variables( :webapp_port => node['webapp_port'] || node['HelloWorldNodeJS']['port'], :ip => node['private-ip'] || node['ipaddress'] )
 end
 
 
