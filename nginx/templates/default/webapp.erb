@@ -1,6 +1,6 @@
 upstream myapp1 {
-             <%   @hosts.each do |host| -%>   
-                server <%= host %>:<%= @webapp_port %>;
+             <%   (1..@numberOfNodes.to_i).each do |x| -%>   
+                server <%= @subnet %>.<%= x+10 %>:<%= @webapp_port %>;
  	     <% end -%>
         }
 
